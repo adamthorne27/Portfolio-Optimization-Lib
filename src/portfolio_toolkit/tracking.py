@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 import fcntl
 from pathlib import Path
 import tempfile
@@ -26,6 +26,10 @@ def _resolve_sqlite_uri(uri: str, repo_root: Path) -> str:
     return f"sqlite:///{(repo_root / target).resolve()}"
 
 
+def _is_remote_tracking_uri(uri: str) -> bool:
+    return uri.startswith("http://") or uri.startswith("https://")
+
+
 def _tracking_paths(repo_root: Path) -> tuple[Path, Path]:
     mlflow_dir = repo_root / "mlflow"
     lock_path = mlflow_dir / ".mlflow.lock"
@@ -47,13 +51,21 @@ def _mlflow_lock(repo_root: Path):
 def init_mlflow(repo_root: str | Path = ".") -> dict[str, str]:
     root = _repo_root(repo_root)
     settings = load_mlflow_settings(root)
+    tracking_uri = _resolve_sqlite_uri(settings.tracking_uri, root)
+    mlflow.set_tracking_uri(tracking_uri)
+    if _is_remote_tracking_uri(tracking_uri):
+        return {
+            "tracking_uri": tracking_uri,
+            "backend_store_uri": tracking_uri,
+            "artifact_root": "",
+            "db_path": "",
+        }
+
     mlflow_dir, _ = _tracking_paths(root)
     artifact_root = settings.artifact_root_path(root)
     artifact_root.mkdir(parents=True, exist_ok=True)
     db_path = mlflow_dir / "mlflow.db"
     db_path.touch(exist_ok=True)
-    tracking_uri = _resolve_sqlite_uri(settings.tracking_uri, root)
-    mlflow.set_tracking_uri(tracking_uri)
     return {
         "tracking_uri": tracking_uri,
         "backend_store_uri": _resolve_sqlite_uri(settings.backend_store_uri, root),
@@ -62,10 +74,12 @@ def init_mlflow(repo_root: str | Path = ".") -> dict[str, str]:
     }
 
 
-def _get_or_create_experiment(experiment_name: str, artifact_root: Path) -> str:
+def _get_or_create_experiment(experiment_name: str, artifact_root: Path | None) -> str:
     existing = mlflow.get_experiment_by_name(experiment_name)
     if existing is not None:
         return existing.experiment_id
+    if artifact_root is None:
+        return mlflow.create_experiment(experiment_name)
     return mlflow.create_experiment(experiment_name, artifact_location=artifact_root.as_uri())
 
 
@@ -80,8 +94,9 @@ def start_run(
     root = _repo_root(repo_root)
     settings = load_mlflow_settings(root)
     layout = init_mlflow(root)
-    artifact_root = Path(layout["artifact_root"])
-    with _mlflow_lock(root):
+    artifact_root = Path(layout["artifact_root"]) if layout["artifact_root"] else None
+    lock = _mlflow_lock(root) if not _is_remote_tracking_uri(layout["tracking_uri"]) else nullcontext()
+    with lock:
         mlflow.set_tracking_uri(layout["tracking_uri"])
         experiment_name = f"{settings.experiment_prefix}_{dataset_name}"
         experiment_id = _get_or_create_experiment(experiment_name, artifact_root)

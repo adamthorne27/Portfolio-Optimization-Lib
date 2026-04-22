@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-import shutil
 
 import numpy as np
 import pandas as pd
@@ -47,7 +46,18 @@ def repo_root(tmp_path: Path) -> Path:
     (root / "data_cache").mkdir()
     (root / "runs").mkdir()
     (root / "mlflow").mkdir()
-    shutil.copyfile(Path.cwd() / "configs" / "mlflow.toml", root / "configs" / "mlflow.toml")
+    (root / "configs" / "mlflow.toml").write_text(
+        """
+experiment_prefix = "portfolio_toolkit"
+tracking_uri = "sqlite:///mlflow/mlflow.db"
+backend_store_uri = "sqlite:///mlflow/mlflow.db"
+artifact_root = "mlflow/artifacts"
+host = "127.0.0.1"
+port = 5000
+""".strip()
+        + "\n",
+        encoding="utf-8",
+    )
     (root / "configs" / "datasets.toml").write_text(
         """
 [shared_set_1]

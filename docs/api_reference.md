@@ -14,7 +14,7 @@ Load one dataset preset.
 
 ### `load_mlflow_settings(repo_root=None) -> MlflowSettings`
 
-Load local MLflow configuration from `configs/mlflow.toml`.
+Load the shared MLflow configuration from `configs/mlflow.toml`. The tracking URI can also be overridden with the `MLFLOW_TRACKING_URI` environment variable.
 
 ## Data And Splits
 

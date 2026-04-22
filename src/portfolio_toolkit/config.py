@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import asdict
 from datetime import date
+import os
 from pathlib import Path
 import tomllib
 
@@ -52,9 +53,11 @@ def load_mlflow_settings(repo_root: str | Path | None = None) -> MlflowSettings:
     config_path = _repo_root(repo_root) / "configs" / "mlflow.toml"
     with config_path.open("rb") as handle:
         payload = tomllib.load(handle)
+    tracking_uri = str(payload.get("tracking_uri", "https://adams-macbook-pro.tail5ddc35.ts.net"))
+    tracking_uri = os.getenv("MLFLOW_TRACKING_URI", tracking_uri)
     return MlflowSettings(
         experiment_prefix=str(payload.get("experiment_prefix", "portfolio_toolkit")),
-        tracking_uri=str(payload.get("tracking_uri", "sqlite:///mlflow/mlflow.db")),
+        tracking_uri=tracking_uri,
         backend_store_uri=str(payload.get("backend_store_uri", "sqlite:///mlflow/mlflow.db")),
         artifact_root=str(payload.get("artifact_root", "mlflow/artifacts")),
         host=str(payload.get("host", "127.0.0.1")),

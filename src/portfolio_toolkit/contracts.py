@@ -34,7 +34,7 @@ class DatasetSpec:
 @dataclass(slots=True)
 class MlflowSettings:
     experiment_prefix: str = "portfolio_toolkit"
-    tracking_uri: str = "sqlite:///mlflow/mlflow.db"
+    tracking_uri: str = "https://adams-macbook-pro.tail5ddc35.ts.net"
     backend_store_uri: str = "sqlite:///mlflow/mlflow.db"
     artifact_root: str = "mlflow/artifacts"
     host: str = "127.0.0.1"

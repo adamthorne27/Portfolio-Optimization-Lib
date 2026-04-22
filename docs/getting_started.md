@@ -8,6 +8,7 @@ This guide gets a new teammate from a blank checkout to a working notebook and a
 - a virtual environment or pyenv environment
 - internet access when downloading prices for the first time
 - the shared dataset presets from `configs/datasets.toml`
+- access to the shared team Tailscale network so you can reach the shared MLflow host
 
 Install the repo:
 
@@ -56,7 +57,7 @@ Important details:
 - `configs/datasets.toml`
   Shared dataset presets and split values.
 - `configs/mlflow.toml`
-  Local MLflow settings.
+  Shared MLflow settings. By default this points at the team MLflow host.
 - `notebooks/templates/`
   Starting points for forecast models, features, direct weights, and baseline comparisons.
 - `tests/`
@@ -64,7 +65,25 @@ Important details:
 - `data_cache/`
   Created automatically when price data is downloaded and cached.
 - `mlflow/`
-  Created automatically when MLflow is initialized and runs are logged.
+  Only used for local test overrides. Normal notebook runs log to the shared team MLflow host.
+
+## 3a. Connect To The Shared MLflow Host
+
+The toolkit defaults to this shared MLflow tracking URL:
+
+- `https://adams-macbook-pro.tail5ddc35.ts.net`
+
+Before running notebooks that log to MLflow:
+
+1. join the team's Tailscale tailnet
+2. confirm you can open the MLflow URL in your browser
+3. then run notebooks normally
+
+If you ever need to override the shared server temporarily, set:
+
+```bash
+export MLFLOW_TRACKING_URI=<another-uri>
+```
 
 ## 4. Pick The Right First Notebook
 
@@ -188,8 +207,12 @@ python3 -m pytest -q tests/test_portfolio_validation.py
 python3 -m pytest -q tests/test_backtest_and_mlflow_smoke.py
 ```
 
-Optional MLflow UI:
+Shared MLflow health check:
 
 ```bash
-mlflow ui --backend-store-uri sqlite:///mlflow/mlflow.db
+python3 - <<'PY'
+import mlflow
+mlflow.set_tracking_uri("https://adams-macbook-pro.tail5ddc35.ts.net")
+print(mlflow.get_tracking_uri())
+PY
 ```

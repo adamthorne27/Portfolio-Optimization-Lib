@@ -1,5 +1,5 @@
 experiment_prefix = "portfolio_toolkit"
-tracking_uri = "sqlite:///mlflow/mlflow.db"
+tracking_uri = "https://adams-macbook-pro.tail5ddc35.ts.net"
 backend_store_uri = "sqlite:///mlflow/mlflow.db"
 artifact_root = "mlflow/artifacts"
 host = "127.0.0.1"

@@ -195,12 +195,12 @@ This gives you a clean artifact folder per notebook run.
 
 The toolkit keeps MLflow intentionally simple.
 
-It is local-first:
+It is team-shared by default:
 
-- local SQLite database
-- local artifact folder
+- shared tracking server at `https://adams-macbook-pro.tail5ddc35.ts.net`
 - no model registry
 - no orchestration layer
+- one consistent place to compare runs across the team
 
 Initialize once:
 
@@ -208,6 +208,12 @@ Initialize once:
 from portfolio_toolkit import init_mlflow
 
 init_mlflow()
+```
+
+If you need to override the shared tracking server for a one-off local experiment, set:
+
+```bash
+export MLFLOW_TRACKING_URI=<another-uri>
 ```
 
 Start a run:

@@ -151,12 +151,13 @@ Checklist:
 1. call `init_mlflow()` before logging
 2. wrap logging in `with start_run(...):`
 3. make sure the run block actually executes
-4. make sure the `mlflow/` folder is writable
+4. make sure you are connected to the team's Tailscale network
+5. confirm that `https://adams-macbook-pro.tail5ddc35.ts.net` opens in your browser
 
-Optional local UI:
+If you need to point at a different tracking server temporarily:
 
 ```bash
-mlflow ui --backend-store-uri sqlite:///mlflow/mlflow.db
+export MLFLOW_TRACKING_URI=<another-uri>
 ```
 
 ## 14. Downloaded Data Looks Old

@@ -21,8 +21,23 @@ Your developers should still work in notebooks, choose their own model classes, 
 python3 -m pip install -e ".[dev]"
 ```
 
-3. Start with one of the committed notebook templates in `notebooks/templates/`
-4. Load shared prices, build features, train your own model, emit predictions or weights, backtest, and log to MLflow
+3. Join the team's Tailscale network so you can reach the shared MLflow host
+4. Start with one of the committed notebook templates in `notebooks/templates/`
+5. Load shared prices, build features, train your own model, emit predictions or weights, backtest, and log to MLflow
+
+## Shared MLflow
+
+The repo now defaults to the team's shared MLflow tracking URL:
+
+- `https://adams-macbook-pro.tail5ddc35.ts.net`
+
+That means `init_mlflow()` and `start_run(...)` will log to the same shared tracking server for everyone by default.
+
+If you need to override it temporarily on your own machine, set:
+
+```bash
+export MLFLOW_TRACKING_URI=<another-uri>
+```
 
 Starter datasets included:
 
