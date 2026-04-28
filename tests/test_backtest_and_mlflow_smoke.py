@@ -11,6 +11,7 @@ import pytest
 from portfolio_toolkit import (
     baseline_weights,
     backtest_weights,
+    build_metrics,
     init_mlflow,
     log_backtest,
     log_model_submission,
@@ -18,6 +19,7 @@ from portfolio_toolkit import (
     write_backtest_artifacts,
 )
 from portfolio_toolkit.backtest import _mask_unavailable_weights
+from portfolio_toolkit.contracts import BacktestResult
 
 
 def test_backtest_and_mlflow_smoke(repo_root):
@@ -29,9 +31,46 @@ def test_backtest_and_mlflow_smoke(repo_root):
     artifact_paths = write_backtest_artifacts(result, repo_root / "runs" / "equal_weight_smoke")
     assert "total_return" in result.metrics
     assert Path(artifact_paths["quantstats_report"]).exists()
+    report_html = Path(artifact_paths["quantstats_report"]).read_text(encoding="utf-8")
+    assert "QuantStats Alpha vs SPY" in report_html
+    assert "not the model's <code>expected_alpha</code>" in report_html
 
     with start_run("equal_weight_smoke", "shared_set_1", repo_root=repo_root):
         log_backtest(result)
+
+
+def test_metrics_annualize_over_active_weight_window():
+    dates = pd.to_datetime(["2020-01-01", "2020-01-02", "2022-01-03", "2023-01-03"])
+    nav = pd.Series([100.0, 100.0, 100.0, 121.0], index=dates, name="nav")
+    returns = nav.pct_change().fillna(0.0).rename("returns")
+    weights = pd.DataFrame({"AAA": [1.0]}, index=pd.to_datetime(["2022-01-03"]))
+    benchmark_returns = pd.DataFrame({"SPY": [0.0, 0.0, 0.0, 0.10]}, index=dates)
+    result = BacktestResult(
+        strategy_name="active_window_test",
+        dataset_name="dummy",
+        weights=weights,
+        nav=nav,
+        returns=returns,
+        turnover=pd.Series([1.0], index=weights.index, name="turnover"),
+        benchmark_returns=benchmark_returns,
+        metrics={},
+    )
+
+    metrics = build_metrics(result)
+    expected_years = (pd.Timestamp("2023-01-03") - pd.Timestamp("2022-01-03")).days / 365.25
+    expected_annual_return = (1.21 ** (1.0 / expected_years)) - 1.0
+    expected_benchmark_annual_return = (1.10 ** (1.0 / expected_years)) - 1.0
+
+    assert metrics["evaluation_years"] == pytest.approx(expected_years)
+    assert metrics["evaluation_trading_days"] == 2.0
+    assert metrics["total_return"] == pytest.approx(0.21)
+    assert metrics["annual_return"] == pytest.approx(expected_annual_return)
+    assert metrics["benchmark_total_return"] == pytest.approx(0.10)
+    assert metrics["benchmark_annual_return"] == pytest.approx(expected_benchmark_annual_return)
+    assert metrics["benchmark_sharpe"] > 0.0
+    assert metrics["benchmark_max_drawdown"] == pytest.approx(0.0)
+    assert metrics["excess_return_vs_benchmark"] == pytest.approx(0.11)
+    assert metrics["sharpe_vs_benchmark"] == pytest.approx(metrics["sharpe"] - metrics["benchmark_sharpe"])
 
 
 def test_log_model_submission_writes_manifest_and_artifacts(repo_root, tmp_path):

@@ -269,6 +269,10 @@ Artifacts written:
 - `metrics_table.parquet`
 - `quantstats.html`
 
+Metrics and the QuantStats report are evaluated from the first submitted weight date through the final NAV date. This keeps inactive pre-test years from diluting annual return, volatility, Sharpe, Sortino, Calmar, and benchmark-relative annual metrics.
+
+The QuantStats HTML report includes a benchmark-regression alpha metric. In generated reports this is labeled `QuantStats Alpha vs <benchmark>` because it is not the same as `expected_alpha`, `forward_alpha_*`, or `excess_return_vs_benchmark`. Use `metrics.json` for the toolkit's shared evaluation metrics.
+
 ## Step 9. Log To MLflow
 
 ```python

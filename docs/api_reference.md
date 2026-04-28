@@ -170,9 +170,13 @@ Supported builders:
 
 Compute the standard shared metrics from a `BacktestResult`.
 
+Annualized metrics use the active evaluation window: first submitted weight date through final NAV date. The metric bundle includes `evaluation_years` and `evaluation_trading_days` so the annualization period is explicit.
+
 ### `write_quantstats_report(result, output_dir) -> Path`
 
 Write the QuantStats HTML tear sheet for a strategy.
+
+When a benchmark is present, the QuantStats `Alpha` row is relabeled in the generated HTML as `QuantStats Alpha vs <benchmark>`. This is annualized realized-return regression alpha, not the model prediction column `expected_alpha`, not a `forward_alpha_*` target, and not the simple total-return difference in `excess_return_vs_benchmark`.
 
 ### `write_backtest_artifacts(result, output_dir) -> dict[str, str]`
 

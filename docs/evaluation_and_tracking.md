@@ -142,6 +142,8 @@ from portfolio_toolkit import build_metrics
 
 Metrics computed:
 
+- `evaluation_years`
+- `evaluation_trading_days`
 - `total_return`
 - `annual_return`
 - `annual_volatility`
@@ -151,14 +153,24 @@ Metrics computed:
 - `calmar`
 - `average_turnover`
 - `benchmark_total_return`
+- `benchmark_annual_return`
+- `benchmark_annual_volatility`
+- `benchmark_sharpe`
+- `benchmark_max_drawdown`
 - `excess_return_vs_benchmark`
+- `annual_excess_return_vs_benchmark`
+- `sharpe_vs_benchmark`
 
 Interpretation:
 
+- `evaluation_years`
+  Calendar years from the first active weight date through the final NAV date.
+- `evaluation_trading_days`
+  Number of return observations in that active evaluation window.
 - `annual_return`
-  How fast capital compounded over the evaluation window.
+  CAGR over the active evaluation window, using actual elapsed calendar years.
 - `annual_volatility`
-  Realized daily return volatility annualized.
+  Realized daily return volatility annualized with the active window's observed trading-days-per-year rate.
 - `sharpe`
   Return per unit of realized volatility.
 - `sortino`
@@ -169,6 +181,24 @@ Interpretation:
   Return relative to worst drawdown.
 - `average_turnover`
   How aggressively the portfolio changes through time.
+- `benchmark_total_return`
+  Total return for the preferred benchmark. The toolkit uses `SPY` when it is available, otherwise the first benchmark series in the backtest result.
+- `benchmark_annual_return`
+  Benchmark CAGR over the same active evaluation window.
+- `benchmark_annual_volatility`
+  Benchmark realized daily return volatility annualized over the same active evaluation window.
+- `benchmark_sharpe`
+  Benchmark annual return per unit of realized benchmark volatility.
+- `benchmark_max_drawdown`
+  Benchmark worst peak-to-trough decline over the same active evaluation window.
+- `excess_return_vs_benchmark`
+  Strategy total return minus benchmark total return. This is the simple benchmark-relative performance number.
+- `annual_excess_return_vs_benchmark`
+  Strategy CAGR minus benchmark CAGR over the same active evaluation window.
+- `sharpe_vs_benchmark`
+  Strategy Sharpe minus benchmark Sharpe. Use this to check whether a strategy beat the benchmark on risk-adjusted return, not just total return.
+
+The active evaluation window starts at the first date in the submitted `weights` frame. This prevents years of inactive cash or zero returns before the first model position from diluting CAGR, volatility, Sharpe, Sortino, Calmar, and benchmark-relative metrics.
 
 ## 8. Writing Reports
 
@@ -190,6 +220,24 @@ from portfolio_toolkit import write_quantstats_report, write_backtest_artifacts
 - `quantstats.html`
 
 This gives you a clean artifact folder per notebook run.
+
+### QuantStats Alpha
+
+The QuantStats HTML report has its own `Alpha` metric. In toolkit-generated reports this row is relabeled as `QuantStats Alpha vs <benchmark>` and a note is inserted at the top of the HTML.
+
+That number is annualized regression alpha from realized daily returns:
+
+```text
+annualized mean(strategy_return - beta * benchmark_return)
+```
+
+It is not:
+
+- the model's `expected_alpha` prediction column
+- a `forward_alpha_*` supervised-learning target
+- the same as `excess_return_vs_benchmark`
+
+Use `excess_return_vs_benchmark` in `metrics.json` when you want the simple total-return difference between the strategy and the benchmark.
 
 ## 9. MLflow
 
