@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 from contextlib import contextmanager, nullcontext
+import json
 try:
     import fcntl
     HAS_FCNTL = True
 except ImportError:
     HAS_FCNTL = False
 from pathlib import Path
+import shutil
 import tempfile
+from typing import Any, Mapping, Sequence
 
 import mlflow
 import pandas as pd
@@ -147,3 +150,150 @@ def log_report_artifacts(paths: dict[str, str] | list[str]) -> None:
         artifact_path = Path(path)
         if artifact_path.exists():
             mlflow.log_artifact(str(artifact_path))
+
+
+def _validate_json_serializable(value: Any, label: str) -> None:
+    try:
+        json.dumps(value)
+    except (TypeError, ValueError) as exc:
+        raise TypeError(f"{label} must be JSON-serializable") from exc
+
+
+def _normalize_model_artifacts(model_artifacts: Mapping[str, str | Path] | Sequence[str | Path]) -> dict[str, Path]:
+    if isinstance(model_artifacts, Mapping):
+        if not model_artifacts:
+            raise ValueError("model_artifacts cannot be empty")
+        normalized = {str(name): Path(path) for name, path in model_artifacts.items()}
+    else:
+        if isinstance(model_artifacts, (str, Path)):
+            raise TypeError("model_artifacts must be a mapping or sequence of file paths")
+        normalized = {Path(path).name: Path(path) for path in model_artifacts}
+        if not normalized:
+            raise ValueError("model_artifacts cannot be empty")
+
+    for logical_name, path in normalized.items():
+        if not logical_name:
+            raise ValueError("model_artifacts cannot contain empty logical names")
+        if not path.exists():
+            raise FileNotFoundError(f"model artifact does not exist: {path}")
+        if not path.is_file():
+            raise ValueError(f"model artifact must be a file: {path}")
+    return normalized
+
+
+def _normalize_source_files(source_files: Sequence[str | Path] | None) -> list[Path]:
+    if source_files is None:
+        return []
+    if isinstance(source_files, (str, Path)):
+        raise TypeError("source_files must be a sequence of file paths")
+    normalized = [Path(path) for path in source_files]
+    for path in normalized:
+        if not path.exists():
+            raise FileNotFoundError(f"source file does not exist: {path}")
+        if not path.is_file():
+            raise ValueError(f"source file must be a file: {path}")
+    return normalized
+
+
+def _validate_artifact_dir(artifact_dir: str) -> str:
+    cleaned = artifact_dir.strip("/")
+    if not cleaned:
+        raise ValueError("artifact_dir cannot be empty")
+    path = Path(cleaned)
+    if path.is_absolute() or ".." in path.parts:
+        raise ValueError("artifact_dir must be a relative MLflow artifact path")
+    return cleaned
+
+
+def _copy_unique(source: Path, destination_dir: Path) -> Path:
+    destination_dir.mkdir(parents=True, exist_ok=True)
+    candidate = destination_dir / source.name
+    if candidate.exists():
+        stem = source.stem
+        suffix = source.suffix
+        counter = 1
+        while candidate.exists():
+            candidate = destination_dir / f"{stem}_{counter}{suffix}"
+            counter += 1
+    shutil.copy2(source, candidate)
+    return candidate
+
+
+def log_model_submission(
+    model_artifacts: Mapping[str, str | Path] | Sequence[str | Path],
+    *,
+    model_name: str,
+    model_family: str,
+    feature_names: Sequence[str],
+    target: str,
+    horizon: int,
+    preprocessing: Mapping[str, Any] | None = None,
+    model_config: Mapping[str, Any] | None = None,
+    source_files: Sequence[str | Path] | None = None,
+    notes: str | None = None,
+    artifact_dir: str = "model_submission",
+) -> dict[str, Any]:
+    """Log a reconstructable model bundle to the active MLflow run.
+
+    The caller is responsible for saving framework-specific model files before
+    calling this helper. This function packages those files with ordered feature
+    metadata and optional preprocessing/config details needed for later inference.
+    """
+
+    artifacts = _normalize_model_artifacts(model_artifacts)
+    sources = _normalize_source_files(source_files)
+    ordered_features = [str(feature) for feature in feature_names]
+    if not ordered_features:
+        raise ValueError("feature_names cannot be empty")
+    if int(horizon) <= 0:
+        raise ValueError("horizon must be positive")
+    cleaned_artifact_dir = _validate_artifact_dir(artifact_dir)
+
+    manifest: dict[str, Any] = {
+        "model_name": str(model_name),
+        "model_family": str(model_family),
+        "target": str(target),
+        "horizon": int(horizon),
+        "feature_names": ordered_features,
+        "preprocessing": dict(preprocessing or {}),
+        "model_config": dict(model_config or {}),
+        "notes": notes,
+        "artifact_files": [],
+        "artifact_map": {},
+        "source_files": [],
+    }
+    _validate_json_serializable(manifest, "model submission metadata")
+
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        bundle_dir = Path(tmp_dir) / "bundle"
+        artifacts_dir = bundle_dir / "artifacts"
+        source_dir = bundle_dir / "source"
+        bundle_dir.mkdir(parents=True, exist_ok=True)
+
+        for logical_name, path in artifacts.items():
+            copied = _copy_unique(path, artifacts_dir)
+            relative = copied.relative_to(bundle_dir).as_posix()
+            manifest["artifact_files"].append(relative)
+            manifest["artifact_map"][logical_name] = relative
+
+        for path in sources:
+            copied = _copy_unique(path, source_dir)
+            manifest["source_files"].append(copied.relative_to(bundle_dir).as_posix())
+
+        _validate_json_serializable(manifest, "model submission manifest")
+        manifest_path = bundle_dir / "manifest.json"
+        manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+        mlflow.log_params(
+            {
+                "submission_model_name": manifest["model_name"],
+                "submission_model_family": manifest["model_family"],
+                "submission_target": manifest["target"],
+                "submission_horizon": manifest["horizon"],
+                "submission_feature_count": len(ordered_features),
+            }
+        )
+        mlflow.set_tag("has_model_submission", "true")
+        mlflow.log_artifacts(str(bundle_dir), artifact_path=cleaned_artifact_dir)
+
+    return manifest

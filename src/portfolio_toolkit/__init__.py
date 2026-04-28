@@ -17,7 +17,15 @@ from .portfolio import (
 )
 from .reporting import build_metrics, write_backtest_artifacts, write_quantstats_report
 from .splits import slice_split, split_dates
-from .tracking import init_mlflow, log_backtest, log_portfolio, log_predictions, log_report_artifacts, start_run
+from .tracking import (
+    init_mlflow,
+    log_backtest,
+    log_model_submission,
+    log_portfolio,
+    log_predictions,
+    log_report_artifacts,
+    start_run,
+)
 from .validation import validate_feature_frame, validate_prediction_frame, validate_prices_frame, validate_weights_frame
 
 __all__ = [
@@ -37,6 +45,7 @@ __all__ = [
     "load_mlflow_settings",
     "load_prices",
     "log_backtest",
+    "log_model_submission",
     "log_portfolio",
     "log_predictions",
     "log_report_artifacts",

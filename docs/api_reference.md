@@ -200,6 +200,17 @@ Log a portfolio weights artifact.
 
 Log metrics and any existing report artifacts from a backtest result.
 
+### `log_model_submission(model_artifacts, *, model_name, model_family, feature_names, target, horizon, preprocessing=None, model_config=None, source_files=None, notes=None, artifact_dir="model_submission") -> dict`
+
+Log a reconstructable model bundle to the active MLflow run. The caller saves framework-specific model files first, then this helper packages them with ordered feature names, target/horizon details, optional preprocessing metadata, optional model config, and optional source notebooks/code.
+
+Expected notebook-side submission functions:
+
+- `build_model_features(prices)`: required. Rebuilds the exact feature dataframe, including custom features, from standard prices.
+- `predict_from_prices(model, prices, dates=None, tickers=None)`: required. Runs inference on arbitrary dates/ticker subsets and returns the standard prediction frame.
+
+`load_submission_model(...)` is optional. Model loading can be reconstructed from the model artifact, notebook source, and manifest.
+
 ### `log_report_artifacts(paths) -> None`
 
 Log explicit artifact paths to MLflow.

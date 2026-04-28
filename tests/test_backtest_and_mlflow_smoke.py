@@ -1,11 +1,22 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
+from mlflow.tracking import MlflowClient
 import numpy as np
 import pandas as pd
+import pytest
 
-from portfolio_toolkit import baseline_weights, backtest_weights, init_mlflow, start_run, write_backtest_artifacts, log_backtest
+from portfolio_toolkit import (
+    baseline_weights,
+    backtest_weights,
+    init_mlflow,
+    log_backtest,
+    log_model_submission,
+    start_run,
+    write_backtest_artifacts,
+)
 from portfolio_toolkit.backtest import _mask_unavailable_weights
 
 
@@ -21,6 +32,95 @@ def test_backtest_and_mlflow_smoke(repo_root):
 
     with start_run("equal_weight_smoke", "shared_set_1", repo_root=repo_root):
         log_backtest(result)
+
+
+def test_log_model_submission_writes_manifest_and_artifacts(repo_root, tmp_path):
+    layout = init_mlflow(repo_root)
+    model_path = tmp_path / "dummy_model.pt"
+    model_path.write_text("model-bytes", encoding="utf-8")
+    source_path = tmp_path / "notebook.ipynb"
+    source_path.write_text("{}", encoding="utf-8")
+
+    with start_run("model_submission_smoke", "shared_set_1", repo_root=repo_root) as run:
+        manifest = log_model_submission(
+            {"model": model_path},
+            model_name="dummy_torch_model",
+            model_family="torch",
+            feature_names=["momentum_20d", "vol_20d"],
+            target="forward_alpha_5d_vs_spy",
+            horizon=5,
+            preprocessing={
+                "scaler": "train_mean_std",
+                "train_means": {"momentum_20d": 0.1, "vol_20d": 0.2},
+                "train_stds": {"momentum_20d": 1.0, "vol_20d": 2.0},
+            },
+            model_config={"latent_dim": 8},
+            source_files=[source_path],
+            notes="test submission",
+        )
+        run_id = run.info.run_id
+
+    assert manifest["feature_names"] == ["momentum_20d", "vol_20d"]
+    assert manifest["artifact_map"] == {"model": "artifacts/dummy_model.pt"}
+    assert manifest["source_files"] == ["source/notebook.ipynb"]
+
+    client = MlflowClient(tracking_uri=layout["tracking_uri"])
+    downloaded = client.download_artifacts(run_id, "model_submission/manifest.json", str(tmp_path / "downloaded"))
+    stored_manifest = json.loads(Path(downloaded).read_text(encoding="utf-8"))
+
+    assert stored_manifest["model_name"] == "dummy_torch_model"
+    assert stored_manifest["model_family"] == "torch"
+    assert stored_manifest["target"] == "forward_alpha_5d_vs_spy"
+    assert stored_manifest["horizon"] == 5
+    assert stored_manifest["feature_names"] == ["momentum_20d", "vol_20d"]
+
+    mlflow_run = client.get_run(run_id)
+    assert mlflow_run.data.params["submission_model_name"] == "dummy_torch_model"
+    assert mlflow_run.data.params["submission_feature_count"] == "2"
+    assert mlflow_run.data.tags["has_model_submission"] == "true"
+
+
+def test_log_model_submission_rejects_missing_artifact(tmp_path):
+    with pytest.raises(FileNotFoundError):
+        log_model_submission(
+            {"model": tmp_path / "missing.pt"},
+            model_name="missing",
+            model_family="torch",
+            feature_names=["momentum_20d"],
+            target="forward_return_5d",
+            horizon=5,
+        )
+
+
+def test_log_model_submission_rejects_empty_features(tmp_path):
+    model_path = tmp_path / "model.txt"
+    model_path.write_text("model", encoding="utf-8")
+
+    with pytest.raises(ValueError):
+        log_model_submission(
+            [model_path],
+            model_name="empty_features",
+            model_family="other",
+            feature_names=[],
+            target="forward_return_5d",
+            horizon=5,
+        )
+
+
+def test_log_model_submission_rejects_non_json_metadata(tmp_path):
+    model_path = tmp_path / "model.txt"
+    model_path.write_text("model", encoding="utf-8")
+
+    with pytest.raises(TypeError):
+        log_model_submission(
+            [model_path],
+            model_name="bad_metadata",
+            model_family="other",
+            feature_names=["momentum_20d"],
+            target="forward_return_5d",
+            horizon=5,
+            model_config={"bad": {object()}},
+        )
 
 
 def test_baseline_weights_respects_repo_root_from_nested_working_directory(repo_root, monkeypatch):

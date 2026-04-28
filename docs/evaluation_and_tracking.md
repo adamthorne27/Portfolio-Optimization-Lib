@@ -232,6 +232,7 @@ from portfolio_toolkit import (
     log_predictions,
     log_portfolio,
     log_backtest,
+    log_model_submission,
 )
 
 log_predictions(predictions)
@@ -239,7 +240,196 @@ log_portfolio(portfolio)
 log_backtest(result)
 ```
 
-## 10. What To Log From Notebooks
+`log_portfolio(...)` writes `weights.parquet`, which is the backtested portfolio allocation by date and ticker. It is not a trained model artifact.
+
+Use `log_model_submission(...)` when you want the MLflow run to carry enough files and metadata to recreate model inference later:
+
+```python
+log_model_submission(
+    {"model": "hannah_model.pt"},
+    model_name="autoencoder_mlp_downstream",
+    model_family="torch",
+    feature_names=all_feature_names,
+    target="forward_alpha_5d_vs_spy",
+    horizon=5,
+    preprocessing={
+        "scaler": "train_mean_std",
+        "train_means": train_means.to_dict(),
+        "train_stds": train_stds.to_dict(),
+    },
+    model_config={"latent_dim": LATENT_DIM},
+    source_files=["MODELS/Hannah/baseline_autoencoder.ipynb"],
+)
+```
+
+This creates a standardized MLflow artifact directory:
+
+- `model_submission/manifest.json`
+- `model_submission/artifacts/<model files>`
+- `model_submission/source/<optional notebooks or code files>`
+
+## 10. Model Submission Requirements
+
+The submission bundle is meant to answer one practical question:
+
+> Can another person recreate this model's predictions on a different dataset by reading the notebook and downloading the MLflow artifacts?
+
+For that to work, every submission notebook must include two reusable functions.
+
+### Required Function 1: `build_model_features(prices)`
+
+This function rebuilds the exact model input table from a raw price frame.
+
+Required behavior:
+
+- accepts one long-form price dataframe with the standard price columns
+- calls `build_features(...)` for shared toolkit features
+- adds every custom notebook-local feature used by the model
+- returns a dataframe with `date`, `ticker`, and all model feature columns
+- does not use forward target columns such as `forward_return_*`, `forward_alpha_*`, or `forward_realized_vol_*`
+- does not assume a fixed ticker universe beyond the rows provided in `prices`
+
+Example:
+
+```python
+base_feature_names = [
+    "momentum_20d",
+    "vol_20d",
+    "rsi_14",
+    "price_to_sma_20d",
+]
+custom_feature_names = ["mom_vol_ratio"]
+feature_names = base_feature_names + custom_feature_names
+
+def build_model_features(prices):
+    features = build_features(prices, feature_names=base_feature_names)
+    features["mom_vol_ratio"] = (
+        features["momentum_20d"] / features["vol_20d"].replace(0.0, float("nan"))
+    )
+    return features
+```
+
+### Required Function 2: `predict_from_prices(model, prices, dates=None, tickers=None)`
+
+This function is the inference entrypoint. It should rebuild features, filter to requested dates/tickers when provided, run the model, and return the standard prediction contract.
+
+Required output columns:
+
+- `date`
+- `ticker`
+- `horizon`
+- `expected_return`
+
+Optional output columns:
+
+- `expected_alpha`
+- `expected_volatility`
+- `uncertainty`
+
+Required behavior:
+
+- uses `build_model_features(prices)` rather than duplicating feature logic
+- preserves the exact `feature_names` order logged in the manifest
+- applies the same preprocessing used during training
+- supports arbitrary ticker subsets through the optional `tickers` argument
+- supports arbitrary evaluation dates through the optional `dates` argument
+- returns only rows that the model actually scored
+- validates with `validate_prediction_frame(...)` before backtesting
+
+Example:
+
+```python
+def predict_from_prices(model, prices, dates=None, tickers=None):
+    features = build_model_features(prices)
+
+    if dates is not None:
+        features = features.loc[features["date"].isin(pd.to_datetime(dates))].copy()
+
+    if tickers is not None:
+        tickers = [ticker.upper() for ticker in tickers]
+        features = features.loc[features["ticker"].isin(tickers)].copy()
+
+    scoring_frame = features.dropna(subset=feature_names).reset_index(drop=True)
+    scores = model.predict(scoring_frame[feature_names])
+
+    predictions = scoring_frame[["date", "ticker"]].copy()
+    predictions["horizon"] = horizon
+    predictions["expected_return"] = scores
+    return predictions
+```
+
+### Model Loading Is Not A Required Function
+
+Participants do not have to define a required `load_submission_model(...)` function. It is useful, but optional.
+
+For official evaluation, model loading can be reconstructed from:
+
+- the saved model artifact in `model_submission/artifacts/`
+- the source notebook in `model_submission/source/`
+- `manifest.json`
+- the framework-specific model format
+
+Common formats:
+
+- Torch: `.pt` or `.pth`
+- sklearn: `.pkl` or `.joblib`
+- XGBoost: `.json`
+- LightGBM: `.txt` or `.pkl`
+- CatBoost: `.cbm`
+
+If a participant uses a non-obvious save/load pattern, they should document it in the notebook or include an optional helper function.
+
+### What `manifest.json` Must Explain
+
+The manifest should make inference reconstruction unambiguous:
+
+- `model_name`: submission/model name
+- `model_family`: framework family, such as `torch`, `sklearn`, `xgboost`, `lightgbm`, `catboost`, or `other`
+- `target`: training target, such as `forward_return_5d`
+- `horizon`: prediction horizon
+- `feature_names`: exact ordered model input columns
+- `preprocessing`: scaler or normalization information
+- `model_config`: architecture and hyperparameter details needed to recreate the model
+- `artifact_files`: model files copied into MLflow
+- `source_files`: notebooks or code files copied into MLflow
+
+For Torch models, save enough config to instantiate the model class before loading the `state_dict`. For tree/sklearn models, prefer native portable formats and record the feature order.
+
+### Minimum MLflow Submission Block
+
+At the bottom of a notebook, after training and backtesting:
+
+```python
+with start_run(...):
+    log_predictions(predictions)
+    log_portfolio(portfolio)
+    log_backtest(result)
+
+    log_model_submission(
+        {"model": model_path},
+        model_name=model_name,
+        model_family="xgboost",
+        feature_names=feature_names,
+        target=target_col,
+        horizon=horizon,
+        preprocessing={"scaler": "none"},
+        model_config={
+            "portfolio_builder": "weights_from_predictions_rank_long_only",
+            "required_functions": ["build_model_features", "predict_from_prices"],
+        },
+        source_files=["MODELS/<Name>/<notebook>.ipynb"],
+    )
+```
+
+### What Not To Do
+
+- Do not treat `weights.parquet` as model weights; it is only portfolio allocations.
+- Do not use future target columns inside `build_model_features(...)` or `predict_from_prices(...)`.
+- Do not hide custom feature logic in an unreusable notebook cell.
+- Do not rely on a fixed ticker list or fixed ticker order.
+- Do not log a model artifact without the feature order and preprocessing metadata.
+
+## 11. What To Log From Notebooks
 
 Recommended parameters:
 
@@ -257,7 +447,8 @@ Recommended parameters:
 Recommended artifacts:
 
 - predictions parquet
-- weights parquet
+- weights parquet for portfolio allocations
+- `model_submission/` for reconstructable model files and inference metadata
 - metrics json
 - QuantStats report
 - any notebook-local config dump or parameter summary
@@ -270,7 +461,7 @@ Recommended tags:
 - strategy type
 - target horizon
 
-## 11. Comparing Multiple Strategies
+## 12. Comparing Multiple Strategies
 
 A good habit is to compare at least:
 
@@ -281,7 +472,7 @@ A good habit is to compare at least:
 
 You can do that in one notebook and assemble a comparison dataframe from each `BacktestResult.metrics`.
 
-## 12. Suggested Folder Pattern For Notebook Runs
+## 13. Suggested Folder Pattern For Notebook Runs
 
 Use one output folder per notebook experiment:
 
