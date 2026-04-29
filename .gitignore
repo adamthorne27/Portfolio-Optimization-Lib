@@ -18,3 +18,5 @@ runs/
 **/runs/
 reports/
 mlflow/
+notebooks/templates
+configs/

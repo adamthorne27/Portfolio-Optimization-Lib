@@ -204,9 +204,9 @@ Log a portfolio weights artifact.
 
 Log metrics and any existing report artifacts from a backtest result.
 
-### `log_model_submission(model_artifacts, *, model_name, model_family, feature_names, target, horizon, preprocessing=None, model_config=None, source_files=None, notes=None, artifact_dir="model_submission") -> dict`
+### `log_model_submission(model_artifacts, *, model_name, model_family, feature_names, target, horizon, rebalance_frequency=None, preprocessing=None, model_config=None, source_files=None, notes=None, artifact_dir="model_submission") -> dict`
 
-Log a reconstructable model bundle to the active MLflow run. The caller saves framework-specific model files first, then this helper packages them with ordered feature names, target/horizon details, optional preprocessing metadata, optional model config, and optional source notebooks/code.
+Log a reconstructable model bundle to the active MLflow run. The caller saves framework-specific model files first, then this helper packages them with ordered feature names, target/horizon details, optional rebalance frequency, optional preprocessing metadata, optional model config, and optional source notebooks/code.
 
 Expected notebook-side submission functions:
 

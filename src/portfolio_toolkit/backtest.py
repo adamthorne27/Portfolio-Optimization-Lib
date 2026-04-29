@@ -52,7 +52,7 @@ def _mask_unavailable_weights(weights: pd.DataFrame, prices: pd.DataFrame) -> pd
         if pd.Timestamp(date_value) not in prices.index:
             continue
 
-        available = prices.loc[pd.Timestamp(date_value), row.index].notna()
+        available = prices.loc[pd.Timestamp(date_value) :, row.index].notna().all()
         masked = row.where(available, 0.0).astype(float)
         total = float(masked.sum())
 

@@ -205,6 +205,15 @@ def _validate_artifact_dir(artifact_dir: str) -> str:
     return cleaned
 
 
+def _normalize_rebalance_frequency(rebalance_frequency: str | None) -> str | None:
+    if rebalance_frequency is None:
+        return None
+    cleaned = str(rebalance_frequency).strip()
+    if not cleaned:
+        raise ValueError("rebalance_frequency cannot be empty")
+    return cleaned
+
+
 def _copy_unique(source: Path, destination_dir: Path) -> Path:
     destination_dir.mkdir(parents=True, exist_ok=True)
     candidate = destination_dir / source.name
@@ -227,6 +236,7 @@ def log_model_submission(
     feature_names: Sequence[str],
     target: str,
     horizon: int,
+    rebalance_frequency: str | None = None,
     preprocessing: Mapping[str, Any] | None = None,
     model_config: Mapping[str, Any] | None = None,
     source_files: Sequence[str | Path] | None = None,
@@ -247,6 +257,7 @@ def log_model_submission(
         raise ValueError("feature_names cannot be empty")
     if int(horizon) <= 0:
         raise ValueError("horizon must be positive")
+    cleaned_rebalance_frequency = _normalize_rebalance_frequency(rebalance_frequency)
     cleaned_artifact_dir = _validate_artifact_dir(artifact_dir)
 
     manifest: dict[str, Any] = {
@@ -254,6 +265,7 @@ def log_model_submission(
         "model_family": str(model_family),
         "target": str(target),
         "horizon": int(horizon),
+        "rebalance_frequency": cleaned_rebalance_frequency,
         "feature_names": ordered_features,
         "preprocessing": dict(preprocessing or {}),
         "model_config": dict(model_config or {}),
@@ -293,6 +305,8 @@ def log_model_submission(
                 "submission_feature_count": len(ordered_features),
             }
         )
+        if cleaned_rebalance_frequency is not None:
+            mlflow.log_param("submission_rebalance_frequency", cleaned_rebalance_frequency)
         mlflow.set_tag("has_model_submission", "true")
         mlflow.log_artifacts(str(bundle_dir), artifact_path=cleaned_artifact_dir)
 
