@@ -1,0 +1,41 @@
+{
+  "model_type": "lightgbm",
+  "target": "forward_alpha_5d_vs_spy",
+  "horizon": 5,
+  "rebalance_frequency": "daily",
+  "dataset": "shared_set_1",
+  "features": [
+    "momentum_5d",
+    "momentum_20d",
+    "vol_20d",
+    "downside_vol_20d",
+    "beta_20d_spy",
+    "price_to_sma_20d",
+    "rsi_14",
+    "macd_hist",
+    "bollinger_z_20d",
+    "volume_zscore_20d",
+    "excess_return_5d_vs_spy",
+    "excess_return_20d_vs_spy",
+    "mom_vol_ratio",
+    "downside_ratio",
+    "mom_divergence",
+    "mom_beta_adjusted",
+    "trend_strength"
+  ],
+  "best_iteration": 68,
+  "params": {
+    "objective": "regression",
+    "metric": "rmse",
+    "learning_rate": 0.01,
+    "num_leaves": 63,
+    "min_child_samples": 20,
+    "feature_fraction": 0.8,
+    "bagging_fraction": 0.8,
+    "bagging_freq": 5,
+    "lambda_l1": 0.1,
+    "lambda_l2": 0.1,
+    "verbose": -1
+  },
+  "source_notebook": "MODELS/Brian/lgbm_v2_alpha.ipynb"
+}
