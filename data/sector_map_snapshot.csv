@@ -1,0 +1,507 @@
+# Static SP500 sector map snapshot. Not true historical point-in-time sector membership.
+# source=https://en.wikipedia.org/wiki/List_of_S%26P_500_companies
+# snapshot_date=2026-05-20
+ticker,sector,source
+MMM,Industrials,wikipedia_sp500_snapshot_2026-05-20
+AOS,Industrials,wikipedia_sp500_snapshot_2026-05-20
+ABT,Health Care,wikipedia_sp500_snapshot_2026-05-20
+ABBV,Health Care,wikipedia_sp500_snapshot_2026-05-20
+ACN,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+ADBE,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+AMD,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+AES,Utilities,wikipedia_sp500_snapshot_2026-05-20
+AFL,Financials,wikipedia_sp500_snapshot_2026-05-20
+A,Health Care,wikipedia_sp500_snapshot_2026-05-20
+APD,Materials,wikipedia_sp500_snapshot_2026-05-20
+ABNB,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+AKAM,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+ALB,Materials,wikipedia_sp500_snapshot_2026-05-20
+ARE,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+ALGN,Health Care,wikipedia_sp500_snapshot_2026-05-20
+ALLE,Industrials,wikipedia_sp500_snapshot_2026-05-20
+LNT,Utilities,wikipedia_sp500_snapshot_2026-05-20
+ALL,Financials,wikipedia_sp500_snapshot_2026-05-20
+GOOGL,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+GOOG,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+MO,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+AMZN,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+AMCR,Materials,wikipedia_sp500_snapshot_2026-05-20
+AEE,Utilities,wikipedia_sp500_snapshot_2026-05-20
+AEP,Utilities,wikipedia_sp500_snapshot_2026-05-20
+AXP,Financials,wikipedia_sp500_snapshot_2026-05-20
+AIG,Financials,wikipedia_sp500_snapshot_2026-05-20
+AMT,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+AWK,Utilities,wikipedia_sp500_snapshot_2026-05-20
+AMP,Financials,wikipedia_sp500_snapshot_2026-05-20
+AME,Industrials,wikipedia_sp500_snapshot_2026-05-20
+AMGN,Health Care,wikipedia_sp500_snapshot_2026-05-20
+APH,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+ADI,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+AON,Financials,wikipedia_sp500_snapshot_2026-05-20
+APA,Energy,wikipedia_sp500_snapshot_2026-05-20
+APO,Financials,wikipedia_sp500_snapshot_2026-05-20
+AAPL,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+AMAT,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+APP,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+APTV,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+ACGL,Financials,wikipedia_sp500_snapshot_2026-05-20
+ADM,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+ARES,Financials,wikipedia_sp500_snapshot_2026-05-20
+ANET,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+AJG,Financials,wikipedia_sp500_snapshot_2026-05-20
+AIZ,Financials,wikipedia_sp500_snapshot_2026-05-20
+T,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+ATO,Utilities,wikipedia_sp500_snapshot_2026-05-20
+ADSK,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+ADP,Industrials,wikipedia_sp500_snapshot_2026-05-20
+AZO,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+AVB,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+AVY,Materials,wikipedia_sp500_snapshot_2026-05-20
+AXON,Industrials,wikipedia_sp500_snapshot_2026-05-20
+BKR,Energy,wikipedia_sp500_snapshot_2026-05-20
+BALL,Materials,wikipedia_sp500_snapshot_2026-05-20
+BAC,Financials,wikipedia_sp500_snapshot_2026-05-20
+BAX,Health Care,wikipedia_sp500_snapshot_2026-05-20
+BDX,Health Care,wikipedia_sp500_snapshot_2026-05-20
+BRK-B,Financials,wikipedia_sp500_snapshot_2026-05-20
+BBY,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+TECH,Health Care,wikipedia_sp500_snapshot_2026-05-20
+BIIB,Health Care,wikipedia_sp500_snapshot_2026-05-20
+BLK,Financials,wikipedia_sp500_snapshot_2026-05-20
+BX,Financials,wikipedia_sp500_snapshot_2026-05-20
+XYZ,Financials,wikipedia_sp500_snapshot_2026-05-20
+BK,Financials,wikipedia_sp500_snapshot_2026-05-20
+BA,Industrials,wikipedia_sp500_snapshot_2026-05-20
+BKNG,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+BSX,Health Care,wikipedia_sp500_snapshot_2026-05-20
+BMY,Health Care,wikipedia_sp500_snapshot_2026-05-20
+AVGO,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+BR,Industrials,wikipedia_sp500_snapshot_2026-05-20
+BRO,Financials,wikipedia_sp500_snapshot_2026-05-20
+BF-B,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+BLDR,Industrials,wikipedia_sp500_snapshot_2026-05-20
+BG,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+BXP,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+CHRW,Industrials,wikipedia_sp500_snapshot_2026-05-20
+CDNS,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+CPT,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+CPB,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+COF,Financials,wikipedia_sp500_snapshot_2026-05-20
+CAH,Health Care,wikipedia_sp500_snapshot_2026-05-20
+CCL,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+CARR,Industrials,wikipedia_sp500_snapshot_2026-05-20
+CVNA,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+CASY,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+CAT,Industrials,wikipedia_sp500_snapshot_2026-05-20
+CBOE,Financials,wikipedia_sp500_snapshot_2026-05-20
+CBRE,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+CDW,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+COR,Health Care,wikipedia_sp500_snapshot_2026-05-20
+CNC,Health Care,wikipedia_sp500_snapshot_2026-05-20
+CNP,Utilities,wikipedia_sp500_snapshot_2026-05-20
+CF,Materials,wikipedia_sp500_snapshot_2026-05-20
+CRL,Health Care,wikipedia_sp500_snapshot_2026-05-20
+SCHW,Financials,wikipedia_sp500_snapshot_2026-05-20
+CHTR,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+CVX,Energy,wikipedia_sp500_snapshot_2026-05-20
+CMG,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+CB,Financials,wikipedia_sp500_snapshot_2026-05-20
+CHD,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+CIEN,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+CI,Health Care,wikipedia_sp500_snapshot_2026-05-20
+CINF,Financials,wikipedia_sp500_snapshot_2026-05-20
+CTAS,Industrials,wikipedia_sp500_snapshot_2026-05-20
+CSCO,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+C,Financials,wikipedia_sp500_snapshot_2026-05-20
+CFG,Financials,wikipedia_sp500_snapshot_2026-05-20
+CLX,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+CME,Financials,wikipedia_sp500_snapshot_2026-05-20
+CMS,Utilities,wikipedia_sp500_snapshot_2026-05-20
+KO,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+CTSH,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+COHR,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+COIN,Financials,wikipedia_sp500_snapshot_2026-05-20
+CL,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+CMCSA,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+FIX,Industrials,wikipedia_sp500_snapshot_2026-05-20
+CAG,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+COP,Energy,wikipedia_sp500_snapshot_2026-05-20
+ED,Utilities,wikipedia_sp500_snapshot_2026-05-20
+STZ,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+CEG,Utilities,wikipedia_sp500_snapshot_2026-05-20
+COO,Health Care,wikipedia_sp500_snapshot_2026-05-20
+CPRT,Industrials,wikipedia_sp500_snapshot_2026-05-20
+GLW,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+CPAY,Financials,wikipedia_sp500_snapshot_2026-05-20
+CTVA,Materials,wikipedia_sp500_snapshot_2026-05-20
+CSGP,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+COST,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+CRH,Materials,wikipedia_sp500_snapshot_2026-05-20
+CRWD,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+CCI,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+CSX,Industrials,wikipedia_sp500_snapshot_2026-05-20
+CMI,Industrials,wikipedia_sp500_snapshot_2026-05-20
+CVS,Health Care,wikipedia_sp500_snapshot_2026-05-20
+DHR,Health Care,wikipedia_sp500_snapshot_2026-05-20
+DRI,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+DDOG,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+DVA,Health Care,wikipedia_sp500_snapshot_2026-05-20
+DECK,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+DE,Industrials,wikipedia_sp500_snapshot_2026-05-20
+DELL,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+DAL,Industrials,wikipedia_sp500_snapshot_2026-05-20
+DVN,Energy,wikipedia_sp500_snapshot_2026-05-20
+DXCM,Health Care,wikipedia_sp500_snapshot_2026-05-20
+FANG,Energy,wikipedia_sp500_snapshot_2026-05-20
+DLR,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+DG,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+DLTR,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+D,Utilities,wikipedia_sp500_snapshot_2026-05-20
+DPZ,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+DASH,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+DOV,Industrials,wikipedia_sp500_snapshot_2026-05-20
+DOW,Materials,wikipedia_sp500_snapshot_2026-05-20
+DHI,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+DTE,Utilities,wikipedia_sp500_snapshot_2026-05-20
+DUK,Utilities,wikipedia_sp500_snapshot_2026-05-20
+DD,Materials,wikipedia_sp500_snapshot_2026-05-20
+ETN,Industrials,wikipedia_sp500_snapshot_2026-05-20
+EBAY,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+SATS,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+ECL,Materials,wikipedia_sp500_snapshot_2026-05-20
+EIX,Utilities,wikipedia_sp500_snapshot_2026-05-20
+EW,Health Care,wikipedia_sp500_snapshot_2026-05-20
+EA,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+ELV,Health Care,wikipedia_sp500_snapshot_2026-05-20
+EME,Industrials,wikipedia_sp500_snapshot_2026-05-20
+EMR,Industrials,wikipedia_sp500_snapshot_2026-05-20
+ETR,Utilities,wikipedia_sp500_snapshot_2026-05-20
+EOG,Energy,wikipedia_sp500_snapshot_2026-05-20
+EPAM,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+EQT,Energy,wikipedia_sp500_snapshot_2026-05-20
+EFX,Industrials,wikipedia_sp500_snapshot_2026-05-20
+EQIX,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+EQR,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+ERIE,Financials,wikipedia_sp500_snapshot_2026-05-20
+ESS,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+EL,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+EG,Financials,wikipedia_sp500_snapshot_2026-05-20
+EVRG,Utilities,wikipedia_sp500_snapshot_2026-05-20
+ES,Utilities,wikipedia_sp500_snapshot_2026-05-20
+EXC,Utilities,wikipedia_sp500_snapshot_2026-05-20
+EXE,Energy,wikipedia_sp500_snapshot_2026-05-20
+EXPE,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+EXPD,Industrials,wikipedia_sp500_snapshot_2026-05-20
+EXR,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+XOM,Energy,wikipedia_sp500_snapshot_2026-05-20
+FFIV,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+FDS,Financials,wikipedia_sp500_snapshot_2026-05-20
+FICO,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+FAST,Industrials,wikipedia_sp500_snapshot_2026-05-20
+FRT,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+FDX,Industrials,wikipedia_sp500_snapshot_2026-05-20
+FIS,Financials,wikipedia_sp500_snapshot_2026-05-20
+FITB,Financials,wikipedia_sp500_snapshot_2026-05-20
+FSLR,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+FE,Utilities,wikipedia_sp500_snapshot_2026-05-20
+FISV,Financials,wikipedia_sp500_snapshot_2026-05-20
+F,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+FTNT,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+FTV,Industrials,wikipedia_sp500_snapshot_2026-05-20
+FOXA,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+FOX,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+BEN,Financials,wikipedia_sp500_snapshot_2026-05-20
+FCX,Materials,wikipedia_sp500_snapshot_2026-05-20
+GRMN,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+IT,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+GE,Industrials,wikipedia_sp500_snapshot_2026-05-20
+GEHC,Health Care,wikipedia_sp500_snapshot_2026-05-20
+GEV,Industrials,wikipedia_sp500_snapshot_2026-05-20
+GEN,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+GNRC,Industrials,wikipedia_sp500_snapshot_2026-05-20
+GD,Industrials,wikipedia_sp500_snapshot_2026-05-20
+GIS,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+GM,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+GPC,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+GILD,Health Care,wikipedia_sp500_snapshot_2026-05-20
+GPN,Financials,wikipedia_sp500_snapshot_2026-05-20
+GL,Financials,wikipedia_sp500_snapshot_2026-05-20
+GDDY,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+GS,Financials,wikipedia_sp500_snapshot_2026-05-20
+HAL,Energy,wikipedia_sp500_snapshot_2026-05-20
+HIG,Financials,wikipedia_sp500_snapshot_2026-05-20
+HAS,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+HCA,Health Care,wikipedia_sp500_snapshot_2026-05-20
+DOC,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+HSIC,Health Care,wikipedia_sp500_snapshot_2026-05-20
+HSY,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+HPE,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+HLT,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+HD,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+HON,Industrials,wikipedia_sp500_snapshot_2026-05-20
+HRL,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+HST,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+HWM,Industrials,wikipedia_sp500_snapshot_2026-05-20
+HPQ,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+HUBB,Industrials,wikipedia_sp500_snapshot_2026-05-20
+HUM,Health Care,wikipedia_sp500_snapshot_2026-05-20
+HBAN,Financials,wikipedia_sp500_snapshot_2026-05-20
+HII,Industrials,wikipedia_sp500_snapshot_2026-05-20
+IBM,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+IEX,Industrials,wikipedia_sp500_snapshot_2026-05-20
+IDXX,Health Care,wikipedia_sp500_snapshot_2026-05-20
+ITW,Industrials,wikipedia_sp500_snapshot_2026-05-20
+INCY,Health Care,wikipedia_sp500_snapshot_2026-05-20
+IR,Industrials,wikipedia_sp500_snapshot_2026-05-20
+PODD,Health Care,wikipedia_sp500_snapshot_2026-05-20
+INTC,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+IBKR,Financials,wikipedia_sp500_snapshot_2026-05-20
+ICE,Financials,wikipedia_sp500_snapshot_2026-05-20
+IFF,Materials,wikipedia_sp500_snapshot_2026-05-20
+IP,Materials,wikipedia_sp500_snapshot_2026-05-20
+INTU,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+ISRG,Health Care,wikipedia_sp500_snapshot_2026-05-20
+IVZ,Financials,wikipedia_sp500_snapshot_2026-05-20
+INVH,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+IQV,Health Care,wikipedia_sp500_snapshot_2026-05-20
+IRM,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+JBHT,Industrials,wikipedia_sp500_snapshot_2026-05-20
+JBL,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+JKHY,Financials,wikipedia_sp500_snapshot_2026-05-20
+J,Industrials,wikipedia_sp500_snapshot_2026-05-20
+JNJ,Health Care,wikipedia_sp500_snapshot_2026-05-20
+JCI,Industrials,wikipedia_sp500_snapshot_2026-05-20
+JPM,Financials,wikipedia_sp500_snapshot_2026-05-20
+KVUE,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+KDP,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+KEY,Financials,wikipedia_sp500_snapshot_2026-05-20
+KEYS,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+KMB,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+KIM,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+KMI,Energy,wikipedia_sp500_snapshot_2026-05-20
+KKR,Financials,wikipedia_sp500_snapshot_2026-05-20
+KLAC,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+KHC,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+KR,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+LHX,Industrials,wikipedia_sp500_snapshot_2026-05-20
+LH,Health Care,wikipedia_sp500_snapshot_2026-05-20
+LRCX,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+LVS,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+LDOS,Industrials,wikipedia_sp500_snapshot_2026-05-20
+LEN,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+LII,Industrials,wikipedia_sp500_snapshot_2026-05-20
+LLY,Health Care,wikipedia_sp500_snapshot_2026-05-20
+LIN,Materials,wikipedia_sp500_snapshot_2026-05-20
+LYV,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+LMT,Industrials,wikipedia_sp500_snapshot_2026-05-20
+L,Financials,wikipedia_sp500_snapshot_2026-05-20
+LOW,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+LULU,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+LITE,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+LYB,Materials,wikipedia_sp500_snapshot_2026-05-20
+MTB,Financials,wikipedia_sp500_snapshot_2026-05-20
+MPC,Energy,wikipedia_sp500_snapshot_2026-05-20
+MAR,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+MRSH,Financials,wikipedia_sp500_snapshot_2026-05-20
+MLM,Materials,wikipedia_sp500_snapshot_2026-05-20
+MAS,Industrials,wikipedia_sp500_snapshot_2026-05-20
+MA,Financials,wikipedia_sp500_snapshot_2026-05-20
+MKC,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+MCD,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+MCK,Health Care,wikipedia_sp500_snapshot_2026-05-20
+MDT,Health Care,wikipedia_sp500_snapshot_2026-05-20
+MRK,Health Care,wikipedia_sp500_snapshot_2026-05-20
+META,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+MET,Financials,wikipedia_sp500_snapshot_2026-05-20
+MTD,Health Care,wikipedia_sp500_snapshot_2026-05-20
+MGM,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+MCHP,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+MU,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+MSFT,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+MAA,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+MRNA,Health Care,wikipedia_sp500_snapshot_2026-05-20
+TAP,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+MDLZ,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+MPWR,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+MNST,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+MCO,Financials,wikipedia_sp500_snapshot_2026-05-20
+MS,Financials,wikipedia_sp500_snapshot_2026-05-20
+MOS,Materials,wikipedia_sp500_snapshot_2026-05-20
+MSI,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+MSCI,Financials,wikipedia_sp500_snapshot_2026-05-20
+NDAQ,Financials,wikipedia_sp500_snapshot_2026-05-20
+NTAP,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+NFLX,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+NEM,Materials,wikipedia_sp500_snapshot_2026-05-20
+NWSA,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+NWS,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+NEE,Utilities,wikipedia_sp500_snapshot_2026-05-20
+NKE,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+NI,Utilities,wikipedia_sp500_snapshot_2026-05-20
+NDSN,Industrials,wikipedia_sp500_snapshot_2026-05-20
+NSC,Industrials,wikipedia_sp500_snapshot_2026-05-20
+NTRS,Financials,wikipedia_sp500_snapshot_2026-05-20
+NOC,Industrials,wikipedia_sp500_snapshot_2026-05-20
+NCLH,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+NRG,Utilities,wikipedia_sp500_snapshot_2026-05-20
+NUE,Materials,wikipedia_sp500_snapshot_2026-05-20
+NVDA,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+NVR,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+NXPI,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+ORLY,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+OXY,Energy,wikipedia_sp500_snapshot_2026-05-20
+ODFL,Industrials,wikipedia_sp500_snapshot_2026-05-20
+OMC,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+ON,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+OKE,Energy,wikipedia_sp500_snapshot_2026-05-20
+ORCL,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+OTIS,Industrials,wikipedia_sp500_snapshot_2026-05-20
+PCAR,Industrials,wikipedia_sp500_snapshot_2026-05-20
+PKG,Materials,wikipedia_sp500_snapshot_2026-05-20
+PLTR,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+PANW,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+PSKY,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+PH,Industrials,wikipedia_sp500_snapshot_2026-05-20
+PAYX,Industrials,wikipedia_sp500_snapshot_2026-05-20
+PYPL,Financials,wikipedia_sp500_snapshot_2026-05-20
+PNR,Industrials,wikipedia_sp500_snapshot_2026-05-20
+PEP,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+PFE,Health Care,wikipedia_sp500_snapshot_2026-05-20
+PCG,Utilities,wikipedia_sp500_snapshot_2026-05-20
+PM,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+PSX,Energy,wikipedia_sp500_snapshot_2026-05-20
+PNW,Utilities,wikipedia_sp500_snapshot_2026-05-20
+PNC,Financials,wikipedia_sp500_snapshot_2026-05-20
+POOL,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+PPG,Materials,wikipedia_sp500_snapshot_2026-05-20
+PPL,Utilities,wikipedia_sp500_snapshot_2026-05-20
+PFG,Financials,wikipedia_sp500_snapshot_2026-05-20
+PG,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+PGR,Financials,wikipedia_sp500_snapshot_2026-05-20
+PLD,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+PRU,Financials,wikipedia_sp500_snapshot_2026-05-20
+PEG,Utilities,wikipedia_sp500_snapshot_2026-05-20
+PTC,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+PSA,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+PHM,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+PWR,Industrials,wikipedia_sp500_snapshot_2026-05-20
+QCOM,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+DGX,Health Care,wikipedia_sp500_snapshot_2026-05-20
+Q,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+RL,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+RJF,Financials,wikipedia_sp500_snapshot_2026-05-20
+RTX,Industrials,wikipedia_sp500_snapshot_2026-05-20
+O,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+REG,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+REGN,Health Care,wikipedia_sp500_snapshot_2026-05-20
+RF,Financials,wikipedia_sp500_snapshot_2026-05-20
+RSG,Industrials,wikipedia_sp500_snapshot_2026-05-20
+RMD,Health Care,wikipedia_sp500_snapshot_2026-05-20
+RVTY,Health Care,wikipedia_sp500_snapshot_2026-05-20
+HOOD,Financials,wikipedia_sp500_snapshot_2026-05-20
+ROK,Industrials,wikipedia_sp500_snapshot_2026-05-20
+ROL,Industrials,wikipedia_sp500_snapshot_2026-05-20
+ROP,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+ROST,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+RCL,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+SPGI,Financials,wikipedia_sp500_snapshot_2026-05-20
+CRM,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+SNDK,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+SBAC,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+SLB,Energy,wikipedia_sp500_snapshot_2026-05-20
+STX,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+SRE,Utilities,wikipedia_sp500_snapshot_2026-05-20
+NOW,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+SHW,Materials,wikipedia_sp500_snapshot_2026-05-20
+SPG,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+SWKS,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+SJM,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+SW,Materials,wikipedia_sp500_snapshot_2026-05-20
+SNA,Industrials,wikipedia_sp500_snapshot_2026-05-20
+SOLV,Health Care,wikipedia_sp500_snapshot_2026-05-20
+SO,Utilities,wikipedia_sp500_snapshot_2026-05-20
+LUV,Industrials,wikipedia_sp500_snapshot_2026-05-20
+SWK,Industrials,wikipedia_sp500_snapshot_2026-05-20
+SBUX,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+STT,Financials,wikipedia_sp500_snapshot_2026-05-20
+STLD,Materials,wikipedia_sp500_snapshot_2026-05-20
+STE,Health Care,wikipedia_sp500_snapshot_2026-05-20
+SYK,Health Care,wikipedia_sp500_snapshot_2026-05-20
+SMCI,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+SYF,Financials,wikipedia_sp500_snapshot_2026-05-20
+SNPS,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+SYY,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+TMUS,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+TROW,Financials,wikipedia_sp500_snapshot_2026-05-20
+TTWO,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+TPR,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+TRGP,Energy,wikipedia_sp500_snapshot_2026-05-20
+TGT,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+TEL,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+TDY,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+TER,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+TSLA,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+TXN,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+TPL,Energy,wikipedia_sp500_snapshot_2026-05-20
+TXT,Industrials,wikipedia_sp500_snapshot_2026-05-20
+TMO,Health Care,wikipedia_sp500_snapshot_2026-05-20
+TJX,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+TKO,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+TTD,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+TSCO,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+TT,Industrials,wikipedia_sp500_snapshot_2026-05-20
+TDG,Industrials,wikipedia_sp500_snapshot_2026-05-20
+TRV,Financials,wikipedia_sp500_snapshot_2026-05-20
+TRMB,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+TFC,Financials,wikipedia_sp500_snapshot_2026-05-20
+TYL,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+TSN,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+USB,Financials,wikipedia_sp500_snapshot_2026-05-20
+UBER,Industrials,wikipedia_sp500_snapshot_2026-05-20
+UDR,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+ULTA,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+UNP,Industrials,wikipedia_sp500_snapshot_2026-05-20
+UAL,Industrials,wikipedia_sp500_snapshot_2026-05-20
+UPS,Industrials,wikipedia_sp500_snapshot_2026-05-20
+URI,Industrials,wikipedia_sp500_snapshot_2026-05-20
+UNH,Health Care,wikipedia_sp500_snapshot_2026-05-20
+UHS,Health Care,wikipedia_sp500_snapshot_2026-05-20
+VLO,Energy,wikipedia_sp500_snapshot_2026-05-20
+VEEV,Health Care,wikipedia_sp500_snapshot_2026-05-20
+VTR,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+VLTO,Industrials,wikipedia_sp500_snapshot_2026-05-20
+VRSN,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+VRSK,Industrials,wikipedia_sp500_snapshot_2026-05-20
+VZ,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+VRTX,Health Care,wikipedia_sp500_snapshot_2026-05-20
+VRT,Industrials,wikipedia_sp500_snapshot_2026-05-20
+VTRS,Health Care,wikipedia_sp500_snapshot_2026-05-20
+VICI,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+V,Financials,wikipedia_sp500_snapshot_2026-05-20
+VST,Utilities,wikipedia_sp500_snapshot_2026-05-20
+VMC,Materials,wikipedia_sp500_snapshot_2026-05-20
+WRB,Financials,wikipedia_sp500_snapshot_2026-05-20
+GWW,Industrials,wikipedia_sp500_snapshot_2026-05-20
+WAB,Industrials,wikipedia_sp500_snapshot_2026-05-20
+WMT,Consumer Staples,wikipedia_sp500_snapshot_2026-05-20
+DIS,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+WBD,Communication Services,wikipedia_sp500_snapshot_2026-05-20
+WM,Industrials,wikipedia_sp500_snapshot_2026-05-20
+WAT,Health Care,wikipedia_sp500_snapshot_2026-05-20
+WEC,Utilities,wikipedia_sp500_snapshot_2026-05-20
+WFC,Financials,wikipedia_sp500_snapshot_2026-05-20
+WELL,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+WST,Health Care,wikipedia_sp500_snapshot_2026-05-20
+WDC,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+WY,Real Estate,wikipedia_sp500_snapshot_2026-05-20
+WSM,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+WMB,Energy,wikipedia_sp500_snapshot_2026-05-20
+WTW,Financials,wikipedia_sp500_snapshot_2026-05-20
+WDAY,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+WYNN,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+XEL,Utilities,wikipedia_sp500_snapshot_2026-05-20
+XYL,Industrials,wikipedia_sp500_snapshot_2026-05-20
+YUM,Consumer Discretionary,wikipedia_sp500_snapshot_2026-05-20
+ZBRA,Information Technology,wikipedia_sp500_snapshot_2026-05-20
+ZBH,Health Care,wikipedia_sp500_snapshot_2026-05-20
+ZTS,Health Care,wikipedia_sp500_snapshot_2026-05-20
