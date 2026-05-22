@@ -1,0 +1,42 @@
+{
+  "fama_french_5_factor": {
+    "access": "Kenneth R. French Data Library ZIP CSV",
+    "cache_path": "data/ff5_daily_cache.parquet",
+    "citation": "Kenneth R. French Data Library, Fama/French 5 Factors (2x3) daily, https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+    "download_url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_daily_CSV.zip",
+    "name": "Fama-French 5 Factors daily"
+  },
+  "fred_macro": {
+    "access": "FRED graph CSV endpoint",
+    "cache_path": "data/fred_macro_pit_cache_lag1bd.parquet",
+    "citation": "Federal Reserve Bank of St. Louis, FRED, https://fred.stlouisfed.org",
+    "lag_rule": "1 business day for listed non-revised daily series; 30 calendar days default for future uncertain/revised series.",
+    "name": "Federal Reserve Economic Data daily macro series",
+    "series": [
+      "DGS10",
+      "DGS2",
+      "VIXCLS",
+      "BAMLC0A4CBBB",
+      "DTWEXBGS"
+    ]
+  },
+  "prices": {
+    "access": "repository dataset preset via portfolio_toolkit.load_prices",
+    "citation": "Portfolio-Optimization-Lib repository data preset shared_set_1",
+    "name": "portfolio_toolkit shared_set_1",
+    "notes": "Primary OHLCV price panel and benchmark used by the club toolkit."
+  },
+  "sector_manual_overrides": {
+    "access": "hard-coded notebook overrides with cited profile source",
+    "citation": "StockAnalysis, Coterra Energy (CTRA) Company Profile, https://stockanalysis.com/stocks/ctra/company/",
+    "name": "Manual sector overrides for tickers missing from the static S&P 500 snapshot",
+    "notes": "Used only when the repository universe contains a ticker absent from the cached static sector table."
+  },
+  "sector_map": {
+    "access": "dataset spec sector metadata when present, otherwise cached Wikipedia snapshot",
+    "cache_path": "data/sector_map_snapshot.csv",
+    "citation": "Wikipedia contributors, List of S&P 500 companies, https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+    "name": "S&P 500 sector map",
+    "notes": "Static sector-as-of-snapshot approximation, not true historical point-in-time membership."
+  }
+}
