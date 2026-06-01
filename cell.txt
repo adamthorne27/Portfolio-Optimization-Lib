@@ -1,0 +1,66 @@
+# Colab / local bootstrap cell
+import os
+import sys
+from pathlib import Path
+
+def is_repo_root(path: Path) -> bool:
+    return (path / 'pyproject.toml').exists() and (path / 'src' / 'portfolio_toolkit').exists()
+
+def local_repo_candidates() -> list[Path]:
+    candidates = []
+    if 'repo_root' in globals():
+        candidates.append(Path(repo_root).expanduser())
+    pwd = os.environ.get('PWD')
+    if pwd:
+        candidates.append(Path(pwd).expanduser())
+    try:
+        candidates.append(Path.cwd())
+    except FileNotFoundError:
+        pass
+
+    expanded = []
+    for candidate in candidates:
+        try:
+            resolved = candidate.resolve()
+        except FileNotFoundError:
+            continue
+        expanded.append(resolved)
+        expanded.extend(resolved.parents)
+
+    seen = set()
+    ordered = []
+    for candidate in expanded:
+        candidate_str = str(candidate)
+        if candidate_str not in seen:
+            seen.add(candidate_str)
+            ordered.append(candidate)
+    return ordered
+
+local_repo_root = next((path for path in local_repo_candidates() if is_repo_root(path)), None)
+IN_COLAB = local_repo_root is None and 'google.colab' in sys.modules and Path('/content').exists()
+
+if local_repo_root is not None:
+    repo_root = local_repo_root
+    os.chdir(repo_root)
+elif IN_COLAB:
+    REPO_URL = 'https://github.com/adamthorne27/Portfolio-Optimization-Lib.git'
+    REPO_DIR = '/content/Portfolio-Optimizer'
+    if '<your-user-or-org>' in REPO_URL or '<your-repo>' in REPO_URL:
+        raise ValueError('Set REPO_URL to your real GitHub repository URL before running this cell in Colab.')
+    os.chdir('/')
+    if Path(REPO_DIR).exists():
+        !rm -rf "$REPO_DIR"
+    !git clone "$REPO_URL" "$REPO_DIR"
+    %cd "$REPO_DIR"
+    %pip install -e ".[dev]"
+    repo_root = Path(REPO_DIR).resolve()
+else:
+    raise RuntimeError('Could not locate the repository root automatically. Set repo_root and rerun this cell.')
+
+src_path = repo_root / 'src'
+if str(src_path) not in sys.path:
+    sys.path.insert(0, str(src_path))
+
+print('repo_root =', repo_root)
+print('python =', sys.executable)
+print('cwd =', Path.cwd())

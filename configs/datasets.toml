@@ -78,6 +78,212 @@ test_end = "2025-12-31"
 cost_bps = 10.0
 default_benchmark = "SPY"
 
+[regime_modern_tech_gain_2022_2026]
+name = "modern_tech_ai_gain_proxy"
+# Start-date-available proxy universe, not historical ETF holdings.
+tickers = [
+  "AAPL",
+  "ADBE",
+  "ADI",
+  "AMAT",
+  "AMD",
+  "AMZN",
+  "ANET",
+  "AVGO",
+  "CDNS",
+  "CRM",
+  "CRWD",
+  "CSCO",
+  "DDOG",
+  "FTNT",
+  "GOOGL",
+  "INTC",
+  "INTU",
+  "KLAC",
+  "LRCX",
+  "MDB",
+  "META",
+  "MSFT",
+  "MU",
+  "NET",
+  "NFLX",
+  "NOW",
+  "NVDA",
+  "ORCL",
+  "PANW",
+  "PLTR",
+  "QCOM",
+  "SHOP",
+  "SMCI",
+  "SNOW",
+  "SNPS",
+  "TEAM",
+  "TSLA",
+  "TXN",
+  "UBER",
+  "ZS",
+]
+benchmark_ticker = "XLK"
+default_benchmark = "XLK"
+start_date = "2014-01-02"
+end_date = "2026-05-21"
+train_start = "2014-01-02"
+train_end = "2019-12-31"
+val_start = "2020-01-02"
+val_end = "2021-12-31"
+test_start = "2022-01-03"
+test_end = "2026-05-21"
+cost_bps = 10.0
+
+[regime_financial_crisis_loss_2005_2010]
+name = "financial_crisis_loss_proxy"
+# Start-date-available proxy universe, not historical ETF holdings.
+tickers = [
+  "AFL",
+  "AIG",
+  "ALL",
+  "AXP",
+  "BAC",
+  "BK",
+  "C",
+  "COF",
+  "DHI",
+  "FITB",
+  "GS",
+  "HBAN",
+  "HD",
+  "HIG",
+  "JPM",
+  "KBH",
+  "KEY",
+  "LEN",
+  "LOW",
+  "MET",
+  "MS",
+  "MTB",
+  "NVR",
+  "PHM",
+  "PNC",
+  "PRU",
+  "RF",
+  "SCHW",
+  "STT",
+  "TOL",
+  "USB",
+  "WFC",
+  "ZION",
+]
+benchmark_ticker = "XLF"
+default_benchmark = "XLF"
+start_date = "2000-01-03"
+end_date = "2010-12-31"
+train_start = "2000-01-03"
+train_end = "2003-12-31"
+val_start = "2004-01-02"
+val_end = "2004-12-31"
+test_start = "2005-01-03"
+test_end = "2010-12-31"
+cost_bps = 10.0
+
+[regime_nineties_volatility_1995_1999]
+name = "nineties_high_volatility_proxy"
+# Start-date-available proxy universe, not historical ETF holdings.
+# This older window is for regime stress research; long pre-regime train/val history is limited.
+tickers = [
+  "AAPL",
+  "ADBE",
+  "AIG",
+  "AMAT",
+  "AXP",
+  "BA",
+  "BAC",
+  "C",
+  "CAT",
+  "CSCO",
+  "CVX",
+  "DIS",
+  "F",
+  "FDX",
+  "GE",
+  "HD",
+  "HON",
+  "HPQ",
+  "IBM",
+  "INTC",
+  "JNJ",
+  "JPM",
+  "KO",
+  "LMT",
+  "LOW",
+  "MCD",
+  "MMM",
+  "MRK",
+  "MSFT",
+  "ORCL",
+  "PEP",
+  "PFE",
+  "PG",
+  "QCOM",
+  "T",
+  "TXN",
+  "UNP",
+  "VZ",
+  "WFC",
+  "WMT",
+  "XOM",
+]
+benchmark_ticker = "MDY"
+default_benchmark = "MDY"
+start_date = "1993-01-29"
+end_date = "1999-12-31"
+train_start = "1993-01-29"
+train_end = "1994-12-30"
+val_start = "1995-01-03"
+val_end = "1995-05-04"
+test_start = "1995-05-05"
+test_end = "1999-12-31"
+cost_bps = 10.0
+
+[regime_oil_pre2014_energy_2010_2013]
+name = "oil_pre2014_energy_proxy"
+# Start-date-available proxy universe, not historical ETF holdings.
+# Uses 2010-2013 for the test window to avoid overlap with 2014 training data.
+tickers = [
+  "APA",
+  "BKR",
+  "CNX",
+  "COP",
+  "CVX",
+  "DVN",
+  "EOG",
+  "EQT",
+  "FTI",
+  "HAL",
+  "HP",
+  "NBR",
+  "NOV",
+  "OII",
+  "OKE",
+  "OXY",
+  "RIG",
+  "RRC",
+  "SLB",
+  "VLO",
+  "WMB",
+  "XOM",
+]
+benchmark_ticker = "XOP"
+default_benchmark = "XOP"
+start_date = "2006-06-20"
+end_date = "2013-12-31"
+train_start = "2006-06-20"
+train_end = "2008-12-31"
+val_start = "2009-01-02"
+val_end = "2009-12-31"
+test_start = "2010-01-04"
+test_end = "2013-12-31"
+cost_bps = 10.0
+
 [shared_set_2]
 name = "growth_tech_innovation"
 # Higher-beta technology, internet, software, and semiconductor names.
