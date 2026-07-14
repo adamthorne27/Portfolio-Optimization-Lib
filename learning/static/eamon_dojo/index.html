@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eamon XGBoost Model Dojo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <p>Putah Creek Trading</p>
+          <h1>Eamon XGBoost Dojo</h1>
+        </div>
+        <nav id="lesson-list" class="lesson-list"></nav>
+      </aside>
+
+      <section class="workspace">
+        <header class="lesson-header">
+          <div>
+            <p id="lesson-stage" class="stage">Loading</p>
+            <h2 id="lesson-title">Loading lessons...</h2>
+            <p id="lesson-source" class="source"></p>
+          </div>
+          <div class="controls">
+            <button id="reset-code" type="button">Reset</button>
+            <button id="run-code" type="button">Run Cell</button>
+          </div>
+        </header>
+
+        <div class="panes">
+          <article class="problem-pane">
+            <section>
+              <h3>Prerequisites</h3>
+              <ul id="prereq-list"></ul>
+            </section>
+            <section>
+              <h3>Problem</h3>
+              <p id="problem-text"></p>
+            </section>
+            <section>
+              <h3>Notebook Cell Goal</h3>
+              <p id="cell-goal"></p>
+            </section>
+          </article>
+
+          <article class="code-pane">
+            <textarea id="code-editor" spellcheck="false"></textarea>
+            <div class="output-head">
+              <span>Output</span>
+              <span id="run-status">Idle</span>
+            </div>
+            <pre id="output"></pre>
+          </article>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
